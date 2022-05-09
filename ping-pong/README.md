@@ -10,10 +10,10 @@ Primary <----- Secondary
 ![config-pingpong-2](https://user-images.githubusercontent.com/6020549/167327690-67151623-071c-443a-8276-cc79dec57667.jpg)
 
 # Using as primary   
-I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/arduinoCode/CC2500_ping).   
+I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/ArduinoCode/CC2500_ping).   
 
 # Using as secondary   
-I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/arduinoCode/CC2500_pong).   
+I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/ArduinoCode/CC2500_pong).   
 
 
 # Screen Shot
