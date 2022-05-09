@@ -8,8 +8,7 @@ I ported from [this](https://github.com/nopnop2002/Arduino-CC2500).
 
 - 1.27mm pitch PCB Antena
 ![CC2500-1 27mm-PCB-Antena](https://user-images.githubusercontent.com/6020549/167327177-b06ff78e-08a6-4599-907d-366c79189f1d.JPG)
-
-
+ Pin out is [here](https://www.rflink.nl/wires.php).   
 
 # Software requirements
 esp-idf v4.4 or later.   
