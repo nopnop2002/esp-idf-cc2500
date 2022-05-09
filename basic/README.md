@@ -7,9 +7,9 @@ One-way communication for transmission or reception.
 ![config-basic-2](https://user-images.githubusercontent.com/6020549/167327407-95c1f054-f089-4474-8e53-dca7492680d1.jpg)
 
 # Using as transmitter   
-I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/arduinoCode/CC2500_transmitter).   
+I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/ArduinoCode/CC2500_transmitte).   
 
 # Using as receiver   
-I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/arduinoCode/CC2500_receiver).   
+I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/ArduinoCode/CC2500_receive).   
 
 
