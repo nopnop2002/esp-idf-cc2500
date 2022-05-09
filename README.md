@@ -66,6 +66,21 @@ __Some modules do not have GOD0 and GOD2.__
 |Modulation format|2-FSK/GFSK/OOK/MSK|2-FSK/4-FSK/GFSK/ASK/OOK/MSK|
 
 
+# Comparison of cc2500 and nRF24L01
+||cc2500|nRF24L01|
+|:-:|:-:|:-:|
+|Manufacturer|Texas Instrument|Nordic Semiconductor|
+|Frequency|2.4GHz|2.4GHz|
+|Maximum Payload|64Byte|32Byte|
+|FiFo for reception|64Byte*1|32Byte*3|
+|FiFo for transmission|64Byte*1|32Byte*3|
+|CRC Length|16bits|8/16bits|
+|Acknowledgement Payload|No|Yes|
+|Modulation format|2-FSK/GFSK/OOK/MSK|GFSK|
+
+cc2500 cannot tell whether the transmission was successful or unsuccessful on the transmitting side.   
+nRF24L01 can tell whether the transmission was successful or unsuccessful on the transmitting side.   
+
 - GFSK  : Gaussian shaped Frequency Shift Keying
 - FSK   : Frequency Shift Keying
 - 2-FSK : Binary Frequency Shift Keying
