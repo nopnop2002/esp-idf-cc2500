@@ -34,6 +34,9 @@ void primary_task(void *pvParameter)
 		while(waiting) {
 			int rxLen = listenForPacket(rxBuf, 64, &rssi, &lqi);
 			if (rxLen) {
+				TickType_t respTick = xTaskGetTickCount() - startTick;
+				ESP_LOGI(pcTaskGetName(0), "Received packet...");
+				ESP_LOGI(pcTaskGetName(0), "respTick=%d", respTick);
 				ESP_LOGI(pcTaskGetName(0), "rxLen=%d", rxLen);
 				rxBuf[rxLen] = 0;
 				ESP_LOGI(pcTaskGetName(0), "%s --> %s", txBuf, rxBuf);
