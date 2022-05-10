@@ -47,6 +47,21 @@ menu "CC2500 Configuration"
 		help
 			Pin Number to be used as the CSN SPI signal.
 
+	choice SPI_HOST
+		prompt "SPI peripheral that controls this bus"
+		default SPI2_HOST
+		help
+			Select SPI peripheral that controls this bus.
+		config SPI2_HOST
+			bool "SPI2_HOST"
+			help
+				Use SPI2_HOST. This is also called HSPI_HOST.
+		config SPI3_HOST
+			bool "SPI3_HOST"
+			help
+				USE SPI3_HOST. This is also called VSPI_HOST
+	endchoice
+
 	config CC2500_CHANNEL
 		int "CC2500 channel"
 		range 0 255

@@ -12,14 +12,10 @@
 #define TAG "CC2500"
 
 // SPI Stuff
-#if CONFIG_IDF_TARGET_ESP32
-#define HOST_ID HSPI_HOST
-#elif CONFIG_IDF_TARGET_ESP32S2
+#if CONFIG_SPI2_HOST
 #define HOST_ID SPI2_HOST
-#elif CONFIG_IDF_TARGET_ESP32S3
-#define HOST_ID SPI2_HOST
-#elif defined CONFIG_IDF_TARGET_ESP32C3
-#define HOST_ID SPI2_HOST
+#elif CONFIG_SPI3_HOST
+#define HOST_ID SPI3_HOST
 #endif
 
 bool spi_write_byte(uint8_t* Dataout, size_t DataLength )
