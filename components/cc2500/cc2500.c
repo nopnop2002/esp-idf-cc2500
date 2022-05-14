@@ -18,6 +18,8 @@
 #define HOST_ID SPI3_HOST
 #endif
 
+static spi_device_handle_t _handle;
+
 bool spi_write_byte(uint8_t* Dataout, size_t DataLength )
 {
 	spi_transaction_t SPITransaction;

@@ -1,8 +1,6 @@
 #ifndef cc2500_h
 #define cc2500_h
 
-#include <driver/spi_master.h>
-
 #include "cc2500_REG.h"
 #include "cc2500_VAL.h"
 
@@ -42,12 +40,6 @@
 
 #define LOW  0
 #define HIGH 1
-
-#ifndef __MAIN__
-	extern spi_device_handle_t _handle;
-#else
-	spi_device_handle_t _handle;
-#endif
 
 bool    begin(uint8_t);
 void    sendPacket(uint8_t *buf, int blen);
