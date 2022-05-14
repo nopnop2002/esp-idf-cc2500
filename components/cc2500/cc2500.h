@@ -43,7 +43,7 @@
 
 bool    begin(uint8_t);
 void    sendPacket(uint8_t *buf, int blen);
-int	    listenForPacket(uint8_t *buf, int8_t blen, uint8_t *rssi, uint8_t *lqi);
+int     listenForPacket(uint8_t *buf, int8_t blen, uint8_t *rssi, uint8_t *lqi);
 
 
 uint8_t getChipPart(void);
