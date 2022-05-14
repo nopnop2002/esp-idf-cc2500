@@ -9,9 +9,11 @@
 #include "freertos/task.h"
 #include "esp_log.h"
 
+#define __MAIN__
 #include <cc2500.h>
 
 #define TAG "MAIN"
+
 
 #if CONFIG_TRANSMITTER
 void tx_task(void *pvParameter)

@@ -3,7 +3,6 @@
 
 #include <driver/spi_master.h>
 
-//#include "cc2500.h"
 #include "cc2500_REG.h"
 #include "cc2500_VAL.h"
 
@@ -44,18 +43,22 @@
 #define LOW  0
 #define HIGH 1
 
-spi_device_handle_t _handle;
+#ifndef __MAIN__
+	extern spi_device_handle_t _handle;
+#else
+	spi_device_handle_t _handle;
+#endif
 
-bool		begin(uint8_t);
-void		sendPacket(uint8_t *buf, int blen);
-int			listenForPacket(uint8_t *buf, int8_t blen, uint8_t *rssi, uint8_t *lqi);
+bool    begin(uint8_t);
+void    sendPacket(uint8_t *buf, int blen);
+int	    listenForPacket(uint8_t *buf, int8_t blen, uint8_t *rssi, uint8_t *lqi);
 
 
 uint8_t getChipPart(void);
 uint8_t getChipVersion(void);
-void		init(uint8_t channel);
-void		resetDevice(void);
-void		WriteRegister(char addr, char value);
+void    init(uint8_t channel);
+void    resetDevice(void);
+void    WriteRegister(char addr, char value);
 uint8_t ReadRegister(char addr);
 uint8_t ReadStatus(uint8_t addr);
 uint8_t SendStrobe(char strobe);
