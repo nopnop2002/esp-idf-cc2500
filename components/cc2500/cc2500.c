@@ -20,6 +20,39 @@
 
 static spi_device_handle_t _handle;
 
+void spi_init()
+{
+	gpio_reset_pin(CONFIG_CSN_GPIO);
+	gpio_set_direction(CONFIG_CSN_GPIO, GPIO_MODE_OUTPUT);
+	gpio_set_level(CONFIG_CSN_GPIO, 1);
+
+	spi_bus_config_t buscfg = {
+		.sclk_io_num = CONFIG_SCK_GPIO, // set SPI CLK pin
+		.mosi_io_num = CONFIG_MOSI_GPIO, // set SPI MOSI pin
+		.miso_io_num = CONFIG_MISO_GPIO, // set SPI MISO pin
+		.quadwp_io_num = -1,
+		.quadhd_io_num = -1
+	};
+
+	esp_err_t ret;
+	ret = spi_bus_initialize( HOST_ID, &buscfg, SPI_DMA_CH_AUTO );
+	ESP_LOGI(TAG, "spi_bus_initialize=%d",ret);
+	assert(ret==ESP_OK);
+
+	// Hardware CS control don't work.
+	spi_device_interface_config_t devcfg = {
+		.clock_speed_hz = 5000000, // SPI clock is 5 MHz!
+		.queue_size = 7,
+		.mode = 0, // SPI mode 0
+		.spics_io_num = -1, // we will use manual CS control
+		.flags = SPI_DEVICE_NO_DUMMY
+	};
+
+	ret = spi_bus_add_device( HOST_ID, &devcfg, &_handle);
+	ESP_LOGI(TAG, "spi_bus_add_device=%d",ret);
+	assert(ret==ESP_OK);
+}
+
 bool spi_write_byte(uint8_t* Dataout, size_t DataLength )
 {
 	spi_transaction_t SPITransaction;
@@ -61,48 +94,7 @@ uint8_t spi_transfer(uint8_t address) {
 
 
 bool begin(uint8_t channel) {
-	gpio_reset_pin(CONFIG_CSN_GPIO);
-	gpio_set_direction(CONFIG_CSN_GPIO, GPIO_MODE_OUTPUT);
-	gpio_set_level(CONFIG_CSN_GPIO, 1);
-
-	spi_bus_config_t buscfg = {
-		.sclk_io_num = CONFIG_SCK_GPIO, // set SPI CLK pin
-		.mosi_io_num = CONFIG_MOSI_GPIO, // set SPI MOSI pin
-		.miso_io_num = CONFIG_MISO_GPIO, // set SPI MISO pin
-		.quadwp_io_num = -1,
-		.quadhd_io_num = -1
-	};
-
-	esp_err_t ret;
-	ret = spi_bus_initialize( HOST_ID, &buscfg, SPI_DMA_CH_AUTO );
-	ESP_LOGI(TAG, "spi_bus_initialize=%d",ret);
-	assert(ret==ESP_OK);
-
-	// Hardware CS control don't work.
-	spi_device_interface_config_t devcfg = {
-		.clock_speed_hz = 5000000, // SPI clock is 5 MHz!
-		.queue_size = 7,
-		.mode = 0, // SPI mode 0
-		.spics_io_num = -1, // we will use manual CS control
-		.flags = SPI_DEVICE_NO_DUMMY
-	};
-
-	ret = spi_bus_add_device( HOST_ID, &devcfg, &_handle);
-	ESP_LOGI(TAG, "spi_bus_add_device=%d",ret);
-	assert(ret==ESP_OK);
-
-#if 0
-	SPI.begin();
-	//remove regacy mode
-	//SPI.setClockDivider(SPI_CLOCK_DIV2);
-	//SPI.setBitOrder(MSBFIRST);
-	//SPI.setDataMode(SPI_MODE0);
-
-	Serial.print("_chipSelect=");
-	Serial.println(_chipSelect);
-	digitalWrite(_chipSelect,HIGH);
-	pinMode(_chipSelect,OUTPUT);
-#endif
+	spi_init();
 
 	resetDevice();
 	ESP_LOGI(TAG, "channel=%d", channel);
@@ -181,8 +173,6 @@ void init(uint8_t channel) {
 void resetDevice(void) {
 	SendStrobe(CC2500_CMD_SRES);
 }
-
-
 
 int listenForPacket(uint8_t *buf, int8_t blen, uint8_t *rssi, uint8_t *lqi) {
 	WriteRegister(REG_IOCFG1,0x06);
