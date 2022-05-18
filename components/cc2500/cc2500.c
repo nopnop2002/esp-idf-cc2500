@@ -83,12 +83,21 @@ bool spi_read_byte(uint8_t* Datain, uint8_t* Dataout, size_t DataLength )
 	return true;
 }
 
-uint8_t spi_transfer(uint8_t address) {
+uint8_t spi_transfer(uint8_t address)
+{
 	uint8_t datain[1];
 	uint8_t dataout[1];
 	dataout[0] = address;
 	//spi_write_byte(dev, dataout, 1 );
-	spi_read_byte(datain, dataout, 1 );
+	//spi_read_byte(datain, dataout, 1 );
+
+	spi_transaction_t SPITransaction;
+	memset( &SPITransaction, 0, sizeof( spi_transaction_t ) );
+	SPITransaction.length = 8;
+	SPITransaction.tx_buffer = dataout;
+	SPITransaction.rx_buffer = datain;
+	spi_device_transmit( _handle, &SPITransaction );
+
 	return datain[0];
 }
 
@@ -205,7 +214,7 @@ int listenForPacket(uint8_t *buf, int8_t blen, uint8_t *rssi, uint8_t *lqi) {
 			ESP_LOGD(TAG, "RSSI: 0x%02x", *rssi);
 			ESP_LOGD(TAG, "LQI: 0x%02x", *lqi);
 		}
-		    
+
 		// Make sure that the radio is in IDLE state before flushing the FIFO
 		// (Unless RXOFF_MODE has been changed, the radio should be in IDLE state at this point) 
 		SendStrobe(CC2500_CMD_SIDLE);
@@ -237,7 +246,7 @@ void sendPacket(uint8_t *buf, int blen) {
 
 	//Serial.println("Transmitting ");
 	for(int i = 0; i < length; i++)
-	{    
+	{
 		WriteRegister(CC2500_TX_FIFO,packet[i]);
 	}
 	// STX: enable TX
@@ -303,7 +312,7 @@ uint8_t ReadRegister(char addr) {
 	uint8_t result = spi_transfer(0);
 	gpio_set_level(CONFIG_CSN_GPIO, HIGH);
 	//SPI.endTransaction();
-	return result;  
+	return result;
 }
 
 uint8_t ReadStatus(uint8_t addr) {
@@ -323,7 +332,7 @@ uint8_t ReadStatus(uint8_t addr) {
 	uint8_t result = spi_transfer(0);
 	gpio_set_level(CONFIG_CSN_GPIO, HIGH);
 	//SPI.endTransaction();
-	return result;  
+	return result;
 }
 
 
