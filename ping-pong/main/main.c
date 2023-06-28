@@ -3,6 +3,8 @@
  * This sample code is in the public domain.
  */
 
+#include <stdio.h>
+#include <inttypes.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -24,7 +26,7 @@ void primary_task(void *pvParameter)
 	uint8_t lqi;
 
 	while (1) {
-		int txLen = sprintf((char *)txBuf, "Hello World %d", xTaskGetTickCount());
+		int txLen = sprintf((char *)txBuf, "Hello World %"PRIx32, xTaskGetTickCount());
 		ESP_LOGI(pcTaskGetName(0), "txLen=%d", txLen);
 		sendPacket(txBuf, txLen);
 
@@ -36,7 +38,7 @@ void primary_task(void *pvParameter)
 			if (rxLen) {
 				TickType_t respTick = xTaskGetTickCount() - startTick;
 				ESP_LOGI(pcTaskGetName(0), "Received packet...");
-				ESP_LOGI(pcTaskGetName(0), "respTick=%d", respTick);
+				ESP_LOGI(pcTaskGetName(0), "respTick=%"PRIx32, respTick);
 				ESP_LOGI(pcTaskGetName(0), "rxLen=%d", rxLen);
 				rxBuf[rxLen] = 0;
 				ESP_LOGI(pcTaskGetName(0), "%s --> %s", txBuf, rxBuf);
