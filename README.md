@@ -66,6 +66,16 @@ __You can change it to any pin using menuconfig.__
 __Some modules do not have GOD0 and GOD2.__   
 
 
+# Radio frequency   
+The frequencies used are determined by the channel number, base frequency and channel spacing frequency.   
+Base frequency and channel spacing frequency are software specified.   
+The base frequency is set by the 24 bit frequency word located in the FREQ2, FREQ1, and FREQ0 registers.   
+The channel spacing is set in the MDMCFG0.CHANSPC_M and MDMCFG1.CHANSPC_E registers.   
+There are no standards for these values.   
+These values can be determined individually for each application.   
+Therefore, communication between applications with different base and channel spacing frequencies is not possible.   
+
+
 # Comparison of cc2500 and cc1101
 ||cc2500|cc1101|
 |:-:|:-:|:-:|
