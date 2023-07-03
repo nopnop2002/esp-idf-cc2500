@@ -76,7 +76,9 @@ These settings may differ.
 - Manchester encoding configuration
 - Wireless modulation method
 
-You need to use [this](https://github.com/nopnop2002/Arduino-CC2500) when communicating with the Arduino environment.
+You need to use [this](https://github.com/nopnop2002/Arduino-CC2500) when communicating with the Arduino environment.   
+Communication with other libraries is not guaranteed.   
+
 
 # Comparison of cc2500 and cc1101
 ||cc2500|cc1101|
