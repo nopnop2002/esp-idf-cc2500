@@ -75,6 +75,8 @@ These settings may differ.
 - Packet length configuration
 - Manchester encoding configuration
 - Wireless modulation method
+- The data rate used when transmitting
+- The data rate expected in receive
 
 You need to use [this](https://github.com/nopnop2002/Arduino-CC2500) when communicating with the Arduino environment.   
 Communication with other libraries is not guaranteed.   
