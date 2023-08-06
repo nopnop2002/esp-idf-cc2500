@@ -2,7 +2,7 @@ menu "Application Configuration"
 
 	choice DIRECTION
 		prompt "Communication polarity"
-		default RECEIVER
+		default SENDER
 		help
 			Select Communication polarity.
 		config SENDER

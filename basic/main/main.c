@@ -65,8 +65,8 @@ void rx_task(void *pvParameter)
 
 void app_main()
 {
-	bool ret = begin(CONFIG_CC2500_CHANNEL);
-	if (ret != true) {
+	esp_err_t ret = begin(CONFIG_CC2500_CHANNEL);
+	if (ret != ESP_OK) {
 		ESP_LOGE(TAG, "CC2500 not installed");
 		while(1) { vTaskDelay(1); }
 	}

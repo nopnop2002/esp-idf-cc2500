@@ -102,7 +102,7 @@ uint8_t spi_transfer(uint8_t address)
 }
 
 
-bool begin(uint8_t channel) {
+esp_err_t begin(uint8_t channel) {
 	spi_init();
 
 	resetDevice();
@@ -115,10 +115,10 @@ bool begin(uint8_t channel) {
 	ESP_LOGI(TAG, "ChipVersion=%x", ChipVersion);
 	if (ChipPart != 0x80 || ChipVersion != 0x03) {
 		ESP_LOGE(TAG, "CC2500 Not Installed");
-		return false;
+		return ESP_FAIL;
 	}
 	ESP_LOGI(TAG, "CC2500 Installed");
-	return true;
+	return ESP_OK;
 }
 
 void init(uint8_t channel) {
