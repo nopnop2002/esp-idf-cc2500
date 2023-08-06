@@ -195,7 +195,6 @@ void tx_task(void *pvParameter)
 		size_t received = xMessageBufferReceive(xMessageBufferRecv, txBuf, sizeof(txBuf), portMAX_DELAY);
 		ESP_LOGD(pcTaskGetName(0), "xMessageBufferReceive received=%d", received);
 		sendPacket(txBuf, received);
-		vTaskDelay(1000/portTICK_PERIOD_MS);
 	}
 
 	// never reach here
