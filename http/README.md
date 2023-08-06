@@ -64,6 +64,12 @@ You can use nc(netcat) as HTTP Server.
 
 ![config-radio-2](https://github.com/nopnop2002/esp-idf-cc2500/assets/6020549/e1f366e5-7263-414c-b3f9-d97f4b4a5237)
 
+
+Communicate with Arduino Environment.   
+Run this sketch.   
+ArduinoCode\CC2500_transmitte   
+
+### Specifying an HTTP Server   
 HTTP Server is specified by one of the following.   
 - IP address   
  ```192.168.10.20```   
@@ -71,10 +77,5 @@ HTTP Server is specified by one of the following.
  ```http-server.local```   
 - Fully Qualified Domain Name   
  ```http-server.public.io```
-
-Communicate with Arduino Environment.   
-Run this sketch.   
-ArduinoCode\CC2500_transmitte   
-
 
 
