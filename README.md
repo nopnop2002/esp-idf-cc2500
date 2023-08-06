@@ -11,15 +11,16 @@ I ported from [this](https://github.com/nopnop2002/Arduino-CC2500).
  Pin out is [here](https://www.rflink.nl/wires.php).   
 
 # Software requirements
-esp-idf v4.4 or later.   
-This is because this version supports ESP32-C3.   
+ESP-IDF V4.4/V5.x.   
+ESP-IDF V5.0 is required when using ESP32-C2.   
+ESP-IDF V5.1 is required when using ESP32-C6.   
 
 # Installation
 
 ```Shell
 git clone https://github.com/nopnop2002/esp-idf-cc2500
 cd esp-idf-cc2500/basic
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c3}
+idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3/esp32c6}
 idf.py menuconfig
 idf.py flash
 ```
@@ -50,12 +51,12 @@ Previously it was called HSPI_HOST / VSPI_HOST, but now it is called SPI2_HOST /
 
 # Wirering
 
-|CC2500||ESP32|ESP32-S2/S3|ESP32-C3|
+|CC2500||ESP32|ESP32-S2/S3|ESP32-C2/C3/C6|
 |:-:|:-:|:-:|:-:|:-:|
-|MISO|--|GPIO19|GPIO37|GPIO18|
-|SCK|--|GPIO18|GPIO36|GPIO10|
-|MOSI|--|GPIO23|GPIO35|GPIO19|
-|CSN|--|GPIO5|GPIO34|GPIO9|
+|MISO|--|GPIO19|GPIO37|GPIO4|
+|SCK|--|GPIO18|GPIO36|GPIO3|
+|MOSI|--|GPIO23|GPIO35|GPIO2|
+|CSN|--|GPIO5|GPIO34|GPIO1|
 |GDO0|--|N/C|N/C|N/C|
 |GDO2|--|N/C|N/C|N/C|
 |GND|--|GND|GND|GND|
