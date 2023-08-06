@@ -26,7 +26,7 @@ void primary_task(void *pvParameter)
 	uint8_t lqi;
 
 	while (1) {
-		int txLen = sprintf((char *)txBuf, "Hello World %"PRIx32, xTaskGetTickCount());
+		int txLen = sprintf((char *)txBuf, "Hello World %"PRIu32, xTaskGetTickCount());
 		ESP_LOGI(pcTaskGetName(0), "txLen=%d", txLen);
 		sendPacket(txBuf, txLen);
 
