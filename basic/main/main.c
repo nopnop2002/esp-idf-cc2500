@@ -13,26 +13,22 @@
 
 #define TAG "MAIN"
 
-
-#if CONFIG_TRANSMITTER
+#if CONFIG_SENDER
 void tx_task(void *pvParameter)
 {
 	ESP_LOGI(pcTaskGetName(0), "Start");
 	uint8_t txBuf[64];
-	uint8_t sendData = 0x00;
 
 	while (1) {
-		int txLen = 32;
-		for (int i=0;i<txLen;i++) txBuf[i] = sendData;
+		int txLen = sprintf((char *)txBuf, "Hello World %"PRIu32, xTaskGetTickCount());
 		sendPacket(txBuf, txLen);
 		vTaskDelay(1000/portTICK_PERIOD_MS);
-		sendData++;
-	} // end while
+	}
 
 	// never reach here
 	vTaskDelete( NULL );
 }
-#endif // CONFIG_TRANSMITTER
+#endif // CONFIG_SENDER
 
 #if CONFIG_RECEIVER
 void rx_task(void *pvParameter)
@@ -46,7 +42,7 @@ void rx_task(void *pvParameter)
 		int rxLen = listenForPacket(rxBuf, 64, &rssi, &lqi);
 		if (rxLen) {
 			ESP_LOGI(pcTaskGetName(0), "rxLen=%d", rxLen);
-			ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(0), rxBuf, rxLen, ESP_LOG_INFO);
+			ESP_LOGI(pcTaskGetName(0), "rxBuf=[%.*s]", rxLen, rxBuf);
 			int dbm;
 			if (rssi < 0x7F) {
 				dbm = (rssi/2) - 72;
@@ -75,11 +71,11 @@ void app_main()
 		while(1) { vTaskDelay(1); }
 	}
 
-#if CONFIG_TRANSMITTER
-	xTaskCreate(&tx_task, "tx_task", 1024*4, NULL, 5, NULL);
+#if CONFIG_SENDER
+	xTaskCreate(&tx_task, "TX", 1024*4, NULL, 5, NULL);
 #endif
 #if CONFIG_RECEIVER
-	xTaskCreate(&rx_task, "rx_task", 1024*4, NULL, 1, NULL);
+	xTaskCreate(&rx_task, "RX", 1024*4, NULL, 1, NULL);
 #endif
 
 }
