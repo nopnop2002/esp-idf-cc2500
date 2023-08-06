@@ -26,18 +26,17 @@ void setup(){
 }
 
 void loop(){
-  static uint8_t sendData = 0x00;
   static unsigned long previousMillis = 0;
-  unsigned long currentMillis = millis();
   uint8_t txBuf[64];
-  int txLen = 32;
   long sendInterval = 1000; // in milliseconds
 
+  unsigned long currentMillis = millis();
   if(currentMillis - previousMillis > sendInterval) {
-    previousMillis = currentMillis;   
-    for (int i=0;i<txLen;i++) txBuf[i] = sendData;
+    previousMillis = currentMillis;
+    int txLen = sprintf((char *)txBuf, "Hello World %ld", currentMillis);
+    //Serial.print("txLen=");
+    //Serial.println(txLen);
     radio.sendPacket(txBuf, txLen);
-    sendData++;
   }
   //radio.listenForPacket();
 }

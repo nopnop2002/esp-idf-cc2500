@@ -33,21 +33,11 @@ void loop(){
   if (rxLen) {
     Serial.print("rxLen: ");
     Serial.println(rxLen);
-    for (int i=0;i<rxLen;i++) {
-      Serial.print(rxBuf[i], HEX);
-      Serial.print(" ");
-    }
-    Serial.println();
-    for (int i=0;i<rxLen;i++) {
-      char c = rxBuf[i];
-      if (c > 0x20 && c < 0xFF) {
-        Serial.print(c);
-      } else {
-        Serial.print(" ");
-      }
-    }
-    Serial.println();
-
+    rxBuf[rxLen] = 0;
+    Serial.print("[");
+    Serial.print((char *)rxBuf);
+    Serial.println("]");
+    
     int dbm;
     if (rssi < 0x7F) {
       dbm = (rssi/2) - 72;
