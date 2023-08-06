@@ -72,7 +72,7 @@ void secondary_task(void *pvParameter)
 		int rxLen = listenForPacket(rxBuf, 64, &rssi, &lqi);
 		if (rxLen) {
 			ESP_LOGI(pcTaskGetName(0), "rxLen=%d", rxLen);
-			ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(0), rxBuf, rxLen, ESP_LOG_INFO);
+			ESP_LOGI(pcTaskGetName(0), "rxBuf=[%.*s]", rxLen, rxBuf);
 			int dbm;
 			if (rssi < 0x7F) {
 				dbm = (rssi/2) - 72;
@@ -111,10 +111,10 @@ void app_main()
 	}
 
 #if CONFIG_PRIMARY
-	xTaskCreate(&primary_task, "primary_task", 1024*4, NULL, 5, NULL);
+	xTaskCreate(&primary_task, "PRIMARY", 1024*4, NULL, 5, NULL);
 #endif
 #if CONFIG_SECONDARY
-	xTaskCreate(&secondary_task, "secondary_task", 1024*4, NULL, 1, NULL);
+	xTaskCreate(&secondary_task, "SECONDARY", 1024*4, NULL, 1, NULL);
 #endif
 
 }

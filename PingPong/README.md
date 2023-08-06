@@ -1,8 +1,6 @@
-# ping-pong
-```
-Primary -----> Secondary
-Primary <----- Secondary
-```
+# PingPong Example   
+Send data from primary to secondary.   
+In the secondary, the characters are converted and sent back.   
 
 # Configuration   
 
