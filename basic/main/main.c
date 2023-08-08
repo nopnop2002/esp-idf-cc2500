@@ -11,7 +11,7 @@
 
 #include <cc2500.h>
 
-#define TAG "MAIN"
+static const char *TAG = "MAIN";
 
 #if CONFIG_SENDER
 void tx_task(void *pvParameter)

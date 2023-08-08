@@ -14,7 +14,7 @@
 
 #include <cc2500.h>
 
-#define TAG "MAIN"
+static const char *TAG = "MAIN";
 
 #if CONFIG_PRIMARY
 void primary_task(void *pvParameter)
