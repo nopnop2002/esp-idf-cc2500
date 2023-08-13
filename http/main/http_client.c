@@ -104,7 +104,7 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 
 #define MAX_HTTP_OUTPUT_BUFFER 128
 
-static void http_post_with_url(char *url, char * post_data, size_t post_len)
+esp_err_t http_post_with_url(char *url, char * post_data, size_t post_len)
 {
 	ESP_LOGI(TAG, "http_post_with_url url=[%s]", url);
 	char local_response_buffer[MAX_HTTP_OUTPUT_BUFFER] = {0};
@@ -155,6 +155,7 @@ static void http_post_with_url(char *url, char * post_data, size_t post_len)
 	}
 
 	esp_http_client_cleanup(client);
+	return err;
 }
 
 esp_err_t query_mdns_host(const char * host_name, char *ip);
@@ -180,7 +181,9 @@ void http_client(void *pvParameters)
 		if (received > 0) {
 			ESP_LOGI(TAG, "xMessageBufferReceive buffer=[%.*s]",received, buffer);
 			//http_post_with_url("http://192.168.10.46:8000", buffer, received);
-			http_post_with_url(url, buffer, received);
+			if (http_post_with_url(url, buffer, received) != ESP_OK) {
+				ESP_LOGE(TAG, "http_post_with_url fail");
+			}
 		} else {
 			 ESP_LOGE(TAG, "xMessageBufferReceive fail");
 			 break;
