@@ -234,8 +234,8 @@ void rx_task(void *pvParameter)
 			ESP_LOGI(pcTaskGetName(0), "LQI: 0x%02x", lqi);
 
 			size_t sended = xMessageBufferSend(xMessageBufferTrans, rxBuf, rxLen, portMAX_DELAY);
-			if (sended == 0) {
-				ESP_LOGE(pcTaskGetName(NULL), "xMessageBufferSend fail");
+			if (sended == rxLen) {
+				ESP_LOGE(pcTaskGetName(NULL), "xMessageBufferSend fail rxLen=%d sended=%d", rxLen, sended);
 			}
 
 			
@@ -283,11 +283,11 @@ void app_main()
 	// Get the local IP address
 	esp_netif_ip_info_t ip_info;
 	ESP_ERROR_CHECK(esp_netif_get_ip_info(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &ip_info));
-
-#if CONFIG_SENDER
 	char cparam0[64];
 	sprintf(cparam0, IPSTR, IP2STR(&ip_info.ip));
 	ESP_LOGI(TAG, "cparam0=[%s]", cparam0);
+
+#if CONFIG_SENDER
 	xTaskCreate(&tx_task, "TX", 1024*4, NULL, 5, NULL);
 	xTaskCreate(&http_server, "HTTP_SERVER", 1024*4, (void *)cparam0, 5, NULL);
 #endif

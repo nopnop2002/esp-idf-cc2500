@@ -82,15 +82,13 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 			ESP_LOGI(TAG, "HTTP_EVENT_DISCONNECTED");
 			int mbedtls_err = 0;
 			esp_err_t err = esp_tls_get_and_clear_last_error(evt->data, &mbedtls_err, NULL);
-			if (err != 0) {
-				if (output_buffer != NULL) {
-					free(output_buffer);
-					output_buffer = NULL;
-				}
-				output_len = 0;
-				ESP_LOGI(TAG, "Last esp error code: 0x%x", err);
-				ESP_LOGI(TAG, "Last mbedtls failure: 0x%x", mbedtls_err);
+			ESP_LOGI(TAG, "Last esp error code: 0x%x", err);
+			ESP_LOGI(TAG, "Last mbedtls failure: 0x%x", mbedtls_err);
+			if (output_buffer != NULL) {
+				free(output_buffer);
+				output_buffer = NULL;
 			}
+			output_len = 0;
 			break;
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 		case HTTP_EVENT_REDIRECT:
