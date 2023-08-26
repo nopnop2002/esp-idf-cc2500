@@ -219,12 +219,16 @@ void rx_task(void *pvParameter)
 			ESP_LOGI(pcTaskGetName(0), "RSSI(dBm): %d", dbm);
 			ESP_LOGI(pcTaskGetName(0), "LQI: 0x%02x", lqi);
 
-			size_t sended = xMessageBufferSend(xMessageBufferTrans, rxBuf, rxLen, portMAX_DELAY);
-			if (sended == 0) {
-				ESP_LOGE(pcTaskGetName(NULL), "xMessageBufferSend fail");
+			size_t spacesAvailable = xMessageBufferSpacesAvailable( xMessageBufferTrans );
+			ESP_LOGI(pcTaskGetName(NULL), "spacesAvailable=%d", spacesAvailable);
+			if (spacesAvailable < rxLen*2) {
+				ESP_LOGW(pcTaskGetName(NULL), "xMessageBuffer available less than %d", rxLen*2);
+			} else {
+				size_t sended = xMessageBufferSend(xMessageBufferTrans, rxBuf, rxLen, portMAX_DELAY);
+				if (sended != rxLen) {
+					ESP_LOGE(pcTaskGetName(NULL), "xMessageBufferSend fail rxLen=%d sended=%d", rxLen, sended);
+				}
 			}
-
-			
 		} // end if
 		vTaskDelay(1);
 	} // end while
