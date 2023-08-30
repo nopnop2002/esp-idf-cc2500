@@ -36,19 +36,19 @@ menu "Application Configuration"
 		help
 			Select Communication polarity.
 		config SENDER
-			bool "HTTP to Radio"
+			bool "WS to Radio"
 			help
-				HTTP to Radio.
+				WS to Radio.
 		config RECEIVER
-			bool "Radio to HTTP"
+			bool "Radio to WS"
 			help
-				Radio to HTTP.
+				Radio to WS.
 	endchoice
 
 	config WEB_SERVER_HOST
 		depends on RECEIVER
 		string "server to connect to"
-		default "http-server.local"
+		default "ws-server.local"
 		help
 			server to connect to.
 

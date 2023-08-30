@@ -177,6 +177,20 @@ void convert_mdns_host(char * from, char * to)
 	ESP_LOGI(__FUNCTION__, "to=[%s]", to);
 }
 
+void initialize_mdns(void)
+{
+	//initialize mDNS
+	ESP_ERROR_CHECK( mdns_init() );
+	//set mDNS hostname (required if you want to advertise services)
+	ESP_ERROR_CHECK( mdns_hostname_set(CONFIG_MDNS_HOSTNAME) );
+	ESP_LOGI(TAG, "mdns hostname set to: [%s]", CONFIG_MDNS_HOSTNAME);
+
+#if 0
+	//set default mDNS instance name
+	ESP_ERROR_CHECK( mdns_instance_name_set("ESP32 with mDNS") );
+#endif
+}
+
 #if CONFIG_SENDER
 void tx_task(void *pvParameter)
 {
@@ -238,8 +252,8 @@ void rx_task(void *pvParameter)
 }
 #endif // CONFIG_RECEIVER
 
-void mqtt_sub(void *pvParameters);
-void mqtt_pub(void *pvParameters);
+void ws_client(void *pvParameters);
+void ws_server(void *pvParameters);
 
 void app_main()
 {
@@ -261,7 +275,7 @@ void app_main()
 	configASSERT( xMessageBufferRecv );
 
 	// Initialize mDNS
-	ESP_ERROR_CHECK( mdns_init() );
+	initialize_mdns();
 
 	// Initialize CC2500
 	ret = begin(CONFIG_CC2500_CHANNEL);
@@ -270,13 +284,24 @@ void app_main()
 		while(1) { vTaskDelay(1); }
 	}
 
+	// Get the local IP address
+	esp_netif_ip_info_t ip_info;
+	ESP_ERROR_CHECK(esp_netif_get_ip_info(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &ip_info));
+	char cparam0[64];
+	sprintf(cparam0, IPSTR, IP2STR(&ip_info.ip));
+	ESP_LOGI(TAG, "cparam0=[%s]", cparam0);
+
 #if CONFIG_SENDER
 	xTaskCreate(&tx_task, "TX", 1024*4, NULL, 5, NULL);
-	xTaskCreate(&mqtt_sub, "SUB", 1024*4, NULL, 2, NULL);
+	xTaskCreate(&ws_server, "WS_SERVER", 1024*4, (void *)cparam0, 5, NULL);
 #endif
 #if CONFIG_RECEIVER
 	xTaskCreate(&rx_task, "RX", 1024*4, NULL, 1, NULL);
-	xTaskCreate(&mqtt_pub, "PUB", 1024*4, NULL, 2, NULL);
+	xTaskCreate(&ws_client, "WS_CLIENT", 1024*4, NULL, 5, NULL);
 #endif
+
+	while(1) {
+		vTaskDelay(10);
+	}
 
 }

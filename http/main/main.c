@@ -199,7 +199,7 @@ void tx_task(void *pvParameter)
 
 	while (1) {
 		size_t received = xMessageBufferReceive(xMessageBufferRecv, txBuf, sizeof(txBuf), portMAX_DELAY);
-		ESP_LOGD(pcTaskGetName(0), "xMessageBufferReceive received=%d", received);
+		ESP_LOGI(pcTaskGetName(0), "xMessageBufferReceive received=%d", received);
 		sendPacket(txBuf, received);
 	}
 
