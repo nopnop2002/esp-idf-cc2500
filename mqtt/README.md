@@ -22,10 +22,11 @@ This is cc2500 and MQTT gateway application.
 
 
 ## WiFi Setting
-
+Set the information of your access point.   
 ![config-wifi](https://github.com/nopnop2002/esp-idf-cc2500/assets/6020549/ed00b25b-adc5-4ca7-b5d9-2cc763af0eed)
 
 ## Radioi Setting
+Set the wireless communication direction.   
 
 ### MQTT to Radio
 Subscribe with MQTT and send to Radio.   
