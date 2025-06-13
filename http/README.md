@@ -21,11 +21,11 @@ This is cc2500 and HTTP gateway application.
 ![config-app](https://github.com/nopnop2002/esp-idf-cc2500/assets/6020549/c84d30e1-d14b-4371-948b-ecd8ec725935)
 
 ## WiFi Setting
-
+Set the information of your access point.   
 ![config-wifi](https://github.com/nopnop2002/esp-idf-cc2500/assets/6020549/aa47a085-f860-43c3-8f60-666e00b7b709)
 
-
 ## Radioi Setting
+Set the wireless communication direction.   
 
 ### HTTP to Radio
 Subscribe with HTTP and send to Radio.   
