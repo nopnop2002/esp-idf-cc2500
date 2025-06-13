@@ -19,7 +19,7 @@ static const char *TAG = "MAIN";
 #if CONFIG_PRIMARY
 void primary_task(void *pvParameter)
 {
-	ESP_LOGI(pcTaskGetName(0), "Start");
+	ESP_LOGI(pcTaskGetName(NULL), "Start");
 	uint8_t txBuf[64];
 	uint8_t rxBuf[64];
 	uint8_t rssi;
@@ -27,7 +27,7 @@ void primary_task(void *pvParameter)
 
 	while (1) {
 		int txLen = sprintf((char *)txBuf, "Hello World %"PRIu32, xTaskGetTickCount());
-		ESP_LOGI(pcTaskGetName(0), "txLen=%d", txLen);
+		ESP_LOGI(pcTaskGetName(NULL), "txLen=%d", txLen);
 		sendPacket(txBuf, txLen);
 
 		// Wait for a response from the other party
@@ -37,17 +37,17 @@ void primary_task(void *pvParameter)
 			int rxLen = listenForPacket(rxBuf, 64, &rssi, &lqi);
 			if (rxLen) {
 				TickType_t respTick = xTaskGetTickCount() - startTick;
-				ESP_LOGI(pcTaskGetName(0), "Received packet...");
-				ESP_LOGI(pcTaskGetName(0), "respTick=%"PRIx32, respTick);
-				ESP_LOGI(pcTaskGetName(0), "rxLen=%d", rxLen);
+				ESP_LOGI(pcTaskGetName(NULL), "Received packet...");
+				ESP_LOGI(pcTaskGetName(NULL), "respTick=%"PRIx32, respTick);
+				ESP_LOGI(pcTaskGetName(NULL), "rxLen=%d", rxLen);
 				rxBuf[rxLen] = 0;
-				ESP_LOGI(pcTaskGetName(0), "%s --> %s", txBuf, rxBuf);
-				//ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(0), rxBuf, rxLen, ESP_LOG_INFO);
+				ESP_LOGI(pcTaskGetName(NULL), "%s --> %s", txBuf, rxBuf);
+				//ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(NULL), rxBuf, rxLen, ESP_LOG_INFO);
 				waiting = false;
 			} // end if
 			TickType_t diffTick = xTaskGetTickCount() - startTick;
 			if (diffTick > 100) {
-				ESP_LOGE(pcTaskGetName(0), "No responce from others");
+				ESP_LOGE(pcTaskGetName(NULL), "No responce from others");
 				waiting = false;
 			}
 			vTaskDelay(1);
@@ -63,7 +63,7 @@ void primary_task(void *pvParameter)
 #if CONFIG_SECONDARY
 void secondary_task(void *pvParameter)
 {
-	ESP_LOGI(pcTaskGetName(0), "Start");
+	ESP_LOGI(pcTaskGetName(NULL), "Start");
 	uint8_t txBuf[64];
 	uint8_t rxBuf[64];
 	uint8_t rssi;
@@ -71,8 +71,8 @@ void secondary_task(void *pvParameter)
 	while(1) {
 		int rxLen = listenForPacket(rxBuf, 64, &rssi, &lqi);
 		if (rxLen) {
-			ESP_LOGI(pcTaskGetName(0), "rxLen=%d", rxLen);
-			ESP_LOGI(pcTaskGetName(0), "rxBuf=[%.*s]", rxLen, rxBuf);
+			ESP_LOGI(pcTaskGetName(NULL), "rxLen=%d", rxLen);
+			ESP_LOGI(pcTaskGetName(NULL), "rxBuf=[%.*s]", rxLen, rxBuf);
 			int dbm;
 			if (rssi < 0x7F) {
 				dbm = (rssi/2) - 72;
@@ -81,9 +81,9 @@ void secondary_task(void *pvParameter)
 				dbm = (dbm/2) - 72;
 			}
 	
-			ESP_LOGI(pcTaskGetName(0), "RSSI(Raw): 0x%02x", rssi);
-			ESP_LOGI(pcTaskGetName(0), "RSSI(dBm): %d", dbm);
-			ESP_LOGI(pcTaskGetName(0), "LQI: 0x%02x", lqi);
+			ESP_LOGI(pcTaskGetName(NULL), "RSSI(Raw): 0x%02x", rssi);
+			ESP_LOGI(pcTaskGetName(NULL), "RSSI(dBm): %d", dbm);
+			ESP_LOGI(pcTaskGetName(NULL), "LQI: 0x%02x", lqi);
 
 			for (int i=0;i<rxLen;i++) {
 				if (islower(rxBuf[i])) {
