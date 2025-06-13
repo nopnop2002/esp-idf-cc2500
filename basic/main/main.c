@@ -16,7 +16,7 @@ static const char *TAG = "MAIN";
 #if CONFIG_SENDER
 void tx_task(void *pvParameter)
 {
-	ESP_LOGI(pcTaskGetName(0), "Start");
+	ESP_LOGI(pcTaskGetName(NULL), "Start");
 	uint8_t txBuf[64];
 
 	while (1) {
@@ -33,7 +33,7 @@ void tx_task(void *pvParameter)
 #if CONFIG_RECEIVER
 void rx_task(void *pvParameter)
 {
-	ESP_LOGI(pcTaskGetName(0), "Start");
+	ESP_LOGI(pcTaskGetName(NULL), "Start");
 	uint8_t rxBuf[64] = {0};
 	uint8_t rssi;
 	uint8_t lqi;
@@ -41,8 +41,8 @@ void rx_task(void *pvParameter)
 	while(1) {
 		int rxLen = listenForPacket(rxBuf, 64, &rssi, &lqi);
 		if (rxLen) {
-			ESP_LOGI(pcTaskGetName(0), "rxLen=%d", rxLen);
-			ESP_LOGI(pcTaskGetName(0), "rxBuf=[%.*s]", rxLen, rxBuf);
+			ESP_LOGI(pcTaskGetName(NULL), "rxLen=%d", rxLen);
+			ESP_LOGI(pcTaskGetName(NULL), "rxBuf=[%.*s]", rxLen, rxBuf);
 			int dbm;
 			if (rssi < 0x7F) {
 				dbm = (rssi/2) - 72;
@@ -51,9 +51,9 @@ void rx_task(void *pvParameter)
 				dbm = (dbm/2) - 72;
 			}
 	
-			ESP_LOGI(pcTaskGetName(0), "RSSI(Raw): 0x%02x", rssi);
-			ESP_LOGI(pcTaskGetName(0), "RSSI(dBm): %d", dbm);
-			ESP_LOGI(pcTaskGetName(0), "LQI: 0x%02x", lqi);
+			ESP_LOGI(pcTaskGetName(NULL), "RSSI(Raw): 0x%02x", rssi);
+			ESP_LOGI(pcTaskGetName(NULL), "RSSI(dBm): %d", dbm);
+			ESP_LOGI(pcTaskGetName(NULL), "LQI: 0x%02x", lqi);
 		} // end if
 		vTaskDelay(1);
 	} // end while
