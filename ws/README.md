@@ -21,11 +21,11 @@ This is cc2500 and WebSocket gateway application.
 ![config-app](https://github.com/nopnop2002/esp-idf-cc2500/assets/6020549/a5a16ab7-beb1-4ec2-9ba7-a66b8c8c207b)
 
 ## WiFi Setting
-
+Set the information of your access point.   
 ![config-wifi](https://github.com/nopnop2002/esp-idf-cc2500/assets/6020549/321a847f-ec71-4254-b954-babdfd111782)
 
-
 ## Radioi Setting
+Set the wireless communication direction.   
 
 ### WS to Radio
 Subscribe with WebSocket and send to Radio.   
