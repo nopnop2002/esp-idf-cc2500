@@ -12,7 +12,8 @@ I ported from [this](https://github.com/nopnop2002/Arduino-CC2500).
 	Pin out is [here](https://www.rflink.nl/wires.php).   
 
 - Pitch conversion PCB   
-	I use this.
+	I use this.   
+	You can convert from 1.27mm to 2.54mm or from 2mm to 2.54mm.   
 	![Image](https://github.com/user-attachments/assets/4ba83e53-072f-4668-b484-0d88523d8e54)
 
 # Software requirements
