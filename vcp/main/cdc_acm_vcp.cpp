@@ -65,15 +65,20 @@ static bool handle_rx(const uint8_t *data, size_t data_len, void *arg)
 	ESP_LOGI(TAG, "Receiving data through CdcAcmDevice");
 	ESP_LOG_BUFFER_HEXDUMP(TAG, data, data_len, ESP_LOG_INFO);
 
+	// The VCP termination character is CR+LF. So Remove CR/LF.
+	size_t _data_len = 0;
+	for (int i=0;i<data_len;i++) {
+		if (data[i] == 0x0d) continue;
+		if (data[i] == 0x0a) continue;
+		_data_len++;
+	}
+
 	// Send to radio task
 	char buffer[xItemSize];
-	size_t _data_len = data_len;
-	if (data_len > xItemSize) {
-		_data_len = xItemSize;
-	}
+	if (_data_len > xItemSize) _data_len = xItemSize;
 	memcpy(buffer, (char *)data, _data_len);
 	size_t sended = xMessageBufferSendFromISR(xMessageBufferRx, buffer, _data_len, NULL);
-	if (sended != data_len) {
+	if (sended != _data_len) {
 		ESP_LOGE(__FUNCTION__, "xMessageBufferSendFromISR Fail");
 	}
 #endif

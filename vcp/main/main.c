@@ -32,17 +32,8 @@ void tx_task(void *pvParameter)
 	while (1) {
 		size_t received = xMessageBufferReceive(xMessageBufferRx, buf, sizeof(buf), portMAX_DELAY);
 		ESP_LOGI(pcTaskGetName(NULL), "xMessageBufferReceive received=%d", received);
-		ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(NULL), buf, received, ESP_LOG_DEBUG);
-
-		// The VCP termination character is CR+LF. So Remove CR/LF.
-		int txLen = 0;
-		for (int i=0;i<received;i++) {
-			if (buf[i] == 0x0d) continue;
-			if (buf[i] == 0x0a) continue;
-			txLen++;
-		}
-		ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(NULL), buf, txLen, ESP_LOG_INFO);
-		sendPacket(buf, txLen);
+		ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(NULL), buf, received, ESP_LOG_INFO);
+		sendPacket(buf, received);
 	} // end while
 
 	vTaskDelete( NULL );
