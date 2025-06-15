@@ -274,11 +274,11 @@ void app_main()
 
 #if CONFIG_SENDER
 	xTaskCreate(&tx_task, "TX", 1024*4, NULL, 5, NULL);
-	xTaskCreate(&mqtt_sub, "SUB", 1024*4, NULL, 2, NULL);
+	xTaskCreate(&mqtt_sub, "SUB", 1024*4, NULL, 5, NULL);
 #endif
 #if CONFIG_RECEIVER
-	xTaskCreate(&rx_task, "RX", 1024*4, NULL, 1, NULL);
-	xTaskCreate(&mqtt_pub, "PUB", 1024*4, NULL, 2, NULL);
+	xTaskCreate(&rx_task, "RX", 1024*4, NULL, 5, NULL);
+	xTaskCreate(&mqtt_pub, "PUB", 1024*4, NULL, 5, NULL);
 #endif
 
 }
