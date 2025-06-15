@@ -65,6 +65,7 @@ void rx_task(void *pvParameter)
 
 void app_main()
 {
+	// Initialize CC2500
 	esp_err_t ret = begin(CONFIG_CC2500_CHANNEL);
 	if (ret != ESP_OK) {
 		ESP_LOGE(TAG, "CC2500 not installed");
@@ -75,7 +76,7 @@ void app_main()
 	xTaskCreate(&tx_task, "TX", 1024*4, NULL, 5, NULL);
 #endif
 #if CONFIG_RECEIVER
-	xTaskCreate(&rx_task, "RX", 1024*4, NULL, 1, NULL);
+	xTaskCreate(&rx_task, "RX", 1024*4, NULL, 5, NULL);
 #endif
 
 }
