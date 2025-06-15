@@ -17,8 +17,8 @@ I ported from [this](https://github.com/nopnop2002/Arduino-CC2500).
 	![Image](https://github.com/user-attachments/assets/4ba83e53-072f-4668-b484-0d88523d8e54)
 
 # Software requirements
-ESP-IDF V4.4/V5.x.   
-ESP-IDF V5.0 is required when using ESP32-C2.   
+ESP-IDF V5.0 or later.   
+ESP-IDF V4.4 release branch reached EOL in July 2024.   
 ESP-IDF V5.1 is required when using ESP32-C6.   
 
 # Installation
