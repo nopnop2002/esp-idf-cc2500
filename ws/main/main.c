@@ -298,7 +298,7 @@ void app_main()
 	xTaskCreate(&ws_server, "WS_SERVER", 1024*4, (void *)cparam0, 5, NULL);
 #endif
 #if CONFIG_RECEIVER
-	xTaskCreate(&rx_task, "RX", 1024*4, NULL, 1, NULL);
+	xTaskCreate(&rx_task, "RX", 1024*4, NULL, 5, NULL);
 	xTaskCreate(&ws_client, "WS_CLIENT", 1024*4, NULL, 5, NULL);
 #endif
 
