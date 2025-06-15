@@ -210,6 +210,11 @@ extern "C" void cdc_acm_vcp_task(void *pvParameters)
 			if (received > 0) {
 				ESP_LOGI(TAG, "Sending data through CdcAcmDevice");
 				ESP_LOG_BUFFER_HEXDUMP(TAG, buffer, received, ESP_LOG_INFO);
+				if (buffer[received-1] != 0x0a) {
+					buffer[received] = 0x0a;
+					received++;
+					ESP_LOG_BUFFER_HEXDUMP(TAG, buffer, received, ESP_LOG_INFO);
+				}
 				ESP_ERROR_CHECK(vcp->tx_blocking((uint8_t*)buffer, received));
 			}
 			EventBits_t connected = xEventGroupGetBits(device_connected_group);

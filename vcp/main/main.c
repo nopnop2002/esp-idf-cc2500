@@ -53,7 +53,7 @@ void tx_task(void *pvParameter)
 void rx_task(void *pvParameter)
 {
 	ESP_LOGI(pcTaskGetName(NULL), "Start");
-	uint8_t buf[xItemSize+1];
+	uint8_t buf[xItemSize];
 	uint8_t rssi;
 	uint8_t lqi;
 
@@ -74,10 +74,6 @@ void rx_task(void *pvParameter)
 			ESP_LOGI(pcTaskGetName(NULL), "RSSI(dBm): %d", dbm);
 			ESP_LOGI(pcTaskGetName(NULL), "LQI: 0x%02x", lqi);
 
-			if (buf[rxLen-1] != 0x0a) {
-				buf[rxLen] = 0x0a;
-				rxLen++;
-			}
 			size_t spacesAvailable = xMessageBufferSpacesAvailable( xMessageBufferTx );
 			ESP_LOGI(pcTaskGetName(NULL), "spacesAvailable=%d", spacesAvailable);
 			size_t sended = xMessageBufferSend(xMessageBufferTx, buf, rxLen, 100);
