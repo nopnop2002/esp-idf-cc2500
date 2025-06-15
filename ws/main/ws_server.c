@@ -18,8 +18,6 @@
 #include "esp_log.h"
 #include "esp_http_server.h"
 
-#if CONFIG_SENDER
-
 static const char *TAG = "SERVER";
 
 extern MessageBufferHandle_t xMessageBufferRecv;
@@ -113,4 +111,3 @@ void ws_server(void *pvParameters)
     ESP_ERROR_CHECK(start_server(port));
     vTaskDelete(NULL);
 }
-#endif

@@ -22,8 +22,6 @@
 #include "esp_transport_ws.h"
 #include "esp_websocket_client.h"
 
-#if CONFIG_RECEIVER
-
 #define TIMEOUT_SEC 5
 #define TIMEOUT_VAL 0x255
 
@@ -194,4 +192,3 @@ void ws_client(void *pvParameters)
 	esp_websocket_client_destroy(client);
 	vTaskDelete(NULL);
 }
-#endif
