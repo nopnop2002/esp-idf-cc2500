@@ -3,17 +3,17 @@ CC2500 Low-Cost Low-Power 2.4 GHz RF Transceiver driver for esp-idf.
 
 I ported from [this](https://github.com/nopnop2002/Arduino-CC2500).
 
-- 2.00mm pitch External Antena
+- 2.00mm pitch External Antena   
 	![CC2500-2mm-EXT-Antena-2](https://user-images.githubusercontent.com/6020549/167327153-d0f6a162-9d2f-448d-b1e2-a591432f435e.JPG)
 	Pin out is [here](https://www.rflink.nl/wires.php).   
 
-- 1.27mm pitch PCB Antena
+- 1.27mm pitch PCB Antena   
 	![CC2500-1 27mm-PCB-Antena](https://user-images.githubusercontent.com/6020549/167327177-b06ff78e-08a6-4599-907d-366c79189f1d.JPG)
 	Pin out is [here](https://www.rflink.nl/wires.php).   
 
-- Pitch conversion PCB
+- Pitch conversion PCB   
 	I use this.
-	[Image](https://github.com/user-attachments/assets/4ba83e53-072f-4668-b484-0d88523d8e54)
+	![Image](https://github.com/user-attachments/assets/4ba83e53-072f-4668-b484-0d88523d8e54)
 
 # Software requirements
 ESP-IDF V4.4/V5.x.   
