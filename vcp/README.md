@@ -45,7 +45,7 @@ We can buy this breakout on Ebay or AliExpress.
 
 
 # Configuration
-![Image](https://github.com/user-attachments/assets/232066fe-d3fa-4efc-80c8-8fbbb7910bba)
+![Image](https://github.com/user-attachments/assets/e01cabff-1268-4096-9723-71ae613f8f22)
 ![Image](https://github.com/user-attachments/assets/ad00fe0b-10ed-4cfc-80a9-063d5a649456)
 
 ## Radio Setting
