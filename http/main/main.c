@@ -1,4 +1,4 @@
-/* The example of CC250
+/* The example of CC2500
  *
  * This sample code is in the public domain.
  */
@@ -298,7 +298,7 @@ void app_main()
 	xTaskCreate(&http_server, "HTTP_SERVER", 1024*4, (void *)cparam0, 5, NULL);
 #endif
 #if CONFIG_RECEIVER
-	xTaskCreate(&rx_task, "RX", 1024*4, NULL, 1, NULL);
+	xTaskCreate(&rx_task, "RX", 1024*4, NULL, 5, NULL);
 	xTaskCreate(&http_client, "HTTP_CLIENT", 1024*4, NULL, 5, NULL);
 #endif
 

@@ -1,4 +1,4 @@
-/* The example of CC250
+/* The example of CC2500
  *
  * This sample code is in the public domain.
  */

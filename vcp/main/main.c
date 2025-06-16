@@ -1,4 +1,4 @@
-/* The example of CC250
+/* The example of CC2500
  *
  * This sample code is in the public domain.
  */
@@ -104,6 +104,5 @@ void app_main()
 	xTaskCreate(&rx_task, "RX", 1024*4, NULL, 5, NULL);
 #endif
 	// Start CDC_ACM_VCP
-	xTaskCreate(cdc_acm_vcp_task, "CDC_ACM_VCP", 1024*4, NULL, 5, NULL);
-
+	xTaskCreate(&cdc_acm_vcp_task, "CDC_ACM_VCP", 1024*4, NULL, 5, NULL);
 }
