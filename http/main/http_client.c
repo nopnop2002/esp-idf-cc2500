@@ -23,7 +23,6 @@ static const char *TAG = "CLIENT";
 extern MessageBufferHandle_t xMessageBufferTrans;
 extern size_t xItemSize;
 
-
 esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 {
 	static char *output_buffer;  // Buffer to store response of http request from event handler
@@ -183,8 +182,8 @@ void http_client(void *pvParameters)
 				ESP_LOGE(TAG, "http_post_with_url fail");
 			}
 		} else {
-			 ESP_LOGE(TAG, "xMessageBufferReceive fail");
-			 break;
+			ESP_LOGE(TAG, "xMessageBufferReceive fail");
+			break;
 		}
 	} // end while
 

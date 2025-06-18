@@ -38,7 +38,7 @@ MessageBufferHandle_t xMessageBufferRecv;
 // The total number of bytes (not single messages) the message buffer will be able to hold at any one time.
 size_t xBufferSizeBytes = 1024;
 // The size, in bytes, required to hold each item in the message,
-size_t xItemSize = 256;
+size_t xItemSize = 64; // Maximum Payload size of CC2500 is 64
 
 static void event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data)
 {
@@ -197,7 +197,7 @@ void initialize_mdns(void)
 void tx_task(void *pvParameter)
 {
 	ESP_LOGI(pcTaskGetName(NULL), "Start");
-	uint8_t txBuf[64];
+	uint8_t txBuf[xItemSize];
 
 	while (1) {
 		size_t received = xMessageBufferReceive(xMessageBufferRecv, txBuf, sizeof(txBuf), portMAX_DELAY);
@@ -214,7 +214,7 @@ void tx_task(void *pvParameter)
 void rx_task(void *pvParameter)
 {
 	ESP_LOGI(pcTaskGetName(NULL), "Start");
-	uint8_t rxBuf[64] = {0};
+	uint8_t rxBuf[xItemSize];
 	uint8_t rssi;
 	uint8_t lqi;
 
@@ -237,13 +237,9 @@ void rx_task(void *pvParameter)
 
 			size_t spacesAvailable = xMessageBufferSpacesAvailable( xMessageBufferTrans );
 			ESP_LOGI(pcTaskGetName(NULL), "spacesAvailable=%d", spacesAvailable);
-			if (spacesAvailable < rxLen*2) {
-				ESP_LOGW(pcTaskGetName(NULL), "xMessageBuffer available less than %d", rxLen*2);
-			} else {
-				size_t sended = xMessageBufferSend(xMessageBufferTrans, rxBuf, rxLen, portMAX_DELAY);
-				if (sended != rxLen) {
-					ESP_LOGE(pcTaskGetName(NULL), "xMessageBufferSend fail rxLen=%d sended=%d", rxLen, sended);
-				}
+			size_t sended = xMessageBufferSend(xMessageBufferTrans, rxBuf, rxLen, 100);
+			if (sended != rxLen) {
+				ESP_LOGE(pcTaskGetName(NULL), "xMessageBufferSend fail rxLen=%d sended=%d", rxLen, sended);
 			}
 		} // end if
 		vTaskDelay(1);
