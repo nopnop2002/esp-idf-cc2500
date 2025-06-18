@@ -61,7 +61,7 @@ static esp_err_t root_get_handler(httpd_req_t *req)
 		size_t spacesAvailable = xMessageBufferSpacesAvailable( xMessageBufferRecv );
 		ESP_LOGI(TAG, "spacesAvailable=%d", spacesAvailable);
 		if (ws_pkt.len > xItemSize) ws_pkt.len = xItemSize;
-		size_t sended = xMessageBufferSend(xMessageBufferRecv, ws_pkt.payload, ws_pkt.len, portMAX_DELAY);
+		size_t sended = xMessageBufferSend(xMessageBufferRecv, ws_pkt.payload, ws_pkt.len, 100);
 		if (sended != ws_pkt.len) {
 			ESP_LOGE(TAG, "xMessageBufferSend fail. ws_pkt.len=%d sended=%d", ws_pkt.len, sended);
 		}
