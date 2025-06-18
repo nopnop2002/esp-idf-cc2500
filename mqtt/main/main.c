@@ -223,13 +223,9 @@ void rx_task(void *pvParameter)
 
 			size_t spacesAvailable = xMessageBufferSpacesAvailable( xMessageBufferTrans );
 			ESP_LOGI(pcTaskGetName(NULL), "spacesAvailable=%d", spacesAvailable);
-			if (spacesAvailable < rxLen*2) {
-				ESP_LOGW(pcTaskGetName(NULL), "xMessageBuffer available less than %d", rxLen*2);
-			} else {
-				size_t sended = xMessageBufferSend(xMessageBufferTrans, rxBuf, rxLen, portMAX_DELAY);
-				if (sended != rxLen) {
-					ESP_LOGE(pcTaskGetName(NULL), "xMessageBufferSend fail rxLen=%d sended=%d", rxLen, sended);
-				}
+			size_t sended = xMessageBufferSend(xMessageBufferTrans, rxBuf, rxLen, 100);
+			if (sended != rxLen) {
+				ESP_LOGE(pcTaskGetName(NULL), "xMessageBufferSend fail rxLen=%d sended=%d", rxLen, sended);
 			}
 		} // end if
 		vTaskDelay(1);
