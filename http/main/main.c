@@ -240,12 +240,12 @@ void rx_task(void *pvParameter)
 			size_t sended = xMessageBufferSend(xMessageBufferTrans, rxBuf, rxLen, 100);
 			if (sended != rxLen) {
 				ESP_LOGE(pcTaskGetName(NULL), "xMessageBufferSend fail rxLen=%d sended=%d", rxLen, sended);
+				break;
 			}
 		} // end if
-		vTaskDelay(1);
+		vTaskDelay(1); // Avoid Watchdog asserts
 	} // end while
 
-	// never reach here
 	vTaskDelete( NULL );
 }
 #endif // CONFIG_RECEIVER
