@@ -22,3 +22,13 @@ CC2500 is not 5V tolerant.
 You need level shift from 5V to 3.3V.   
 I used [this](https://www.ti.com/lit/ds/symlink/txs0108e.pdf?ts=1647593549503) for a level shift.   
 
+# Application   
+- CC2500_transmitte   
+	Send only.   
+- CC2500_receive   
+	Receive only.   
+- CC2500_ping   
+	Wait for a response after sending.   
+- CC2500_pong   
+	Send a response after receiving.   
+
