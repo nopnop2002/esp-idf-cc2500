@@ -2,6 +2,31 @@
 Send data from primary to secondary.   
 In the secondary, the characters are converted and sent back.   
 
+- ESP32 is Primary   
+```
++-----------+           +-----------+             +-----------+           +-----------+
+|           |           |           |             |           |           |           |
+|  Primary  |===(SPI)==>|  CC2500   |---(Radio)-->|  CC2500   |===(SPI)==>| Secondary |
+|   ESP32   |           |           |             |           |           |           |
+|           |           |           |             |           |           |           |
+|           |<==(SPI)===|           |<--(Radio)---|           |<==(SPI)===|           |
+|           |           |           |             |           |           |           |
++-----------+           +-----------+             +-----------+           +-----------+
+```
+
+- ESP32 is Secondary   
+
+```
++-----------+           +-----------+             +-----------+           +-----------+
+|           |           |           |             |           |           |           |
+|  Primary  |===(SPI)==>|  CC2500   |---(Radio)-->|  CC2500   |===(SPI)==>| Secondary |
+|           |           |           |             |           |           |   ESP32   |
+|           |           |           |             |           |           |           |
+|           |<==(SPI)===|           |<--(Radio)---|           |<==(SPI)===|           |
+|           |           |           |             |           |           |           |
++-----------+           +-----------+             +-----------+           +-----------+
+```
+
 # Configuration   
 
 ![config-pingpong-1](https://user-images.githubusercontent.com/6020549/167327687-2eb16aa3-dbf7-4fd7-8dbe-8784c3a23552.jpg)
