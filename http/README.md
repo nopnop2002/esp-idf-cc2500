@@ -44,9 +44,7 @@ You can use curl as HTTP Client.
 ![config-radio-1](https://github.com/nopnop2002/esp-idf-cc2500/assets/6020549/9918096d-3d41-421f-bf8e-2f3b2b116a34)
 
 Communicate with Arduino Environment.   
-Run this sketch.   
-ArduinoCode\CC2500_receive   
-
+I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/ArduinoCode/CC2500_receive).   
 
 ### Radio to HTTP
 Receive from Radio and publish as HTTP.   
@@ -66,8 +64,7 @@ You can use nc(netcat) as HTTP Server.
 
 
 Communicate with Arduino Environment.   
-Run this sketch.   
-ArduinoCode\CC2500_transmitte   
+I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/ArduinoCode/CC2500_receive).   
 
 ### Specifying an HTTP Server   
 You can specify your HTTP Server in one of the following ways:   
