@@ -64,7 +64,7 @@ You can use nc(netcat) as HTTP Server.
 
 
 Communicate with Arduino Environment.   
-I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/ArduinoCode/CC2500_receive).   
+I tested it with [this](https://github.com/nopnop2002/esp-idf-cc2500/tree/main/ArduinoCode/CC2500_transmitte).   
 
 ### Specifying an HTTP Server   
 You can specify your HTTP Server in one of the following ways:   
