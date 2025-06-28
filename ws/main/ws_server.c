@@ -66,9 +66,9 @@ static esp_err_t root_get_handler(httpd_req_t *req)
 			ESP_LOGE(TAG, "xMessageBufferSend fail. ws_pkt.len=%d sended=%d", ws_pkt.len, sended);
 		}
 
-		ESP_LOGI(TAG, "Packet final: %d", ws_pkt.final);
-		ESP_LOGI(TAG, "Packet fragmented: %d", ws_pkt.fragmented);
-		ESP_LOGI(TAG, "Packet type: %d", ws_pkt.type);
+		ESP_LOGD(TAG, "Packet final: %d", ws_pkt.final);
+		ESP_LOGD(TAG, "Packet fragmented: %d", ws_pkt.fragmented);
+		ESP_LOGD(TAG, "Packet type: %d", ws_pkt.type);
 
 		strcpy((char *)ws_pkt.payload, "ok");
 		ws_pkt.len = 2;
@@ -110,12 +110,12 @@ esp_err_t start_server(int port)
 
 void ws_server(void *pvParameters)
 {
-    char *task_parameter = (char *)pvParameters;
-    ESP_LOGI(TAG, "Start task_parameter=%s", task_parameter);
-    char url[64];
-    int port = CONFIG_WEB_LISTEN_PORT;
-    sprintf(url, "ws://%s:%d", task_parameter, port);
-    ESP_LOGI(TAG, "Starting HTTP server on %s", url);
-    ESP_ERROR_CHECK(start_server(port));
-    vTaskDelete(NULL);
+	char *task_parameter = (char *)pvParameters;
+	ESP_LOGI(TAG, "Start task_parameter=%s", task_parameter);
+	char url[64];
+	int port = CONFIG_WEB_LISTEN_PORT;
+	sprintf(url, "ws://%s:%d", task_parameter, port);
+	ESP_LOGI(TAG, "Starting HTTP server on %s", url);
+	ESP_ERROR_CHECK(start_server(port));
+	vTaskDelete(NULL);
 }
