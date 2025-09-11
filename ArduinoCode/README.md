@@ -1,7 +1,7 @@
 # Example of Arduino environment   
 I use [this](https://github.com/nopnop2002/Arduino-CC2500).   
 
-# Wirering
+# Wiring
 
 |CC2500||UNO|MEGA|ESP8266|
 |:-:|:-:|:-:|:-:|:-:|

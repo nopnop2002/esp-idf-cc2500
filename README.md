@@ -55,7 +55,7 @@ When you don't use SDSPI, both SPI2_HOST and SPI3_HOST will work.
 Previously it was called HSPI_HOST / VSPI_HOST, but now it is called SPI2_HOST / SPI3_HOST.   
 
 
-# Wirering
+# Wiring
 
 |CC2500||ESP32|ESP32-S2/S3|ESP32-C2/C3/C6|
 |:-:|:-:|:-:|:-:|:-:|
