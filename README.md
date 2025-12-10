@@ -4,6 +4,7 @@ CC2500 Low-Cost Low-Power 2.4 GHz RF Transceiver driver for esp-idf.
 I ported from [this](https://github.com/nopnop2002/Arduino-CC2500).
 
 - 2.00mm pitch External Antena   
+	This module uses an external antenna for 2.4GHz.   
 	![CC2500-2mm-EXT-Antena-2](https://user-images.githubusercontent.com/6020549/167327153-d0f6a162-9d2f-448d-b1e2-a591432f435e.JPG)
 	Pin out is [here](https://www.rflink.nl/wires.php).   
 
