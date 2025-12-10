@@ -5,12 +5,12 @@ I ported from [this](https://github.com/nopnop2002/Arduino-CC2500).
 
 - 2.00mm pitch External Antena   
 	This module uses an external antenna for 2.4GHz.   
-	![CC2500-2mm-EXT-Antena-2](https://user-images.githubusercontent.com/6020549/167327153-d0f6a162-9d2f-448d-b1e2-a591432f435e.JPG)
 	Pin out is [here](https://www.rflink.nl/wires.php).   
+	![CC2500-2mm-EXT-Antena-2](https://user-images.githubusercontent.com/6020549/167327153-d0f6a162-9d2f-448d-b1e2-a591432f435e.JPG)
 
 - 1.27mm pitch PCB Antena   
-	![CC2500-1 27mm-PCB-Antena](https://user-images.githubusercontent.com/6020549/167327177-b06ff78e-08a6-4599-907d-366c79189f1d.JPG)
 	Pin out is [here](https://www.rflink.nl/wires.php).   
+	![CC2500-1 27mm-PCB-Antena](https://user-images.githubusercontent.com/6020549/167327177-b06ff78e-08a6-4599-907d-366c79189f1d.JPG)
 
 - Pitch conversion PCB   
 	I use this.   
