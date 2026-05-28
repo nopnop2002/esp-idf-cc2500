@@ -66,6 +66,7 @@ static bool handle_rx(const uint8_t *data, size_t data_len, void *arg)
 	ESP_LOG_BUFFER_HEXDUMP(TAG, data, data_len, ESP_LOG_INFO);
 
 	// The VCP termination character is CR+LF. So Remove CR/LF.
+	if (data_len > xItemSize) data_len = xItemSize;
 	size_t _data_len = 0;
 	for (int i=0;i<data_len;i++) {
 		if (data[i] == 0x0d) continue;
