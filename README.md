@@ -12,6 +12,7 @@ I ported from [this](https://github.com/nopnop2002/Arduino-CC2500).
 - 24TRGC2   
 	1.27mm pitch PCB Antena.   
 	Pin out is [here](https://www.rflink.nl/wires.php).   
+	This pinout is shown as viewed from the back.   
 	![CC2500-1 27mm-PCB-Antena](https://user-images.githubusercontent.com/6020549/167327177-b06ff78e-08a6-4599-907d-366c79189f1d.JPG)
 
 - Pitch conversion PCB   
