@@ -225,6 +225,7 @@ void rx_task(void *pvParameter)
 				ESP_LOGE(pcTaskGetName(NULL), "xMessageBufferSend fail rxLen=%d sended=%d", rxLen, sended);
 				break;
 			}
+			cJSON_free(my_json_string);
 		} // end if
 		vTaskDelay(1); // Avoid Watchdog asserts
 	} // end while
