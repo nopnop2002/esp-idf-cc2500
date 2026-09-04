@@ -42,18 +42,17 @@
 #define HIGH 1
 
 esp_err_t begin(uint8_t);
-void      sendPacket(uint8_t *buf, int blen);
-int       listenForPacket(uint8_t *buf, int8_t blen, uint8_t *rssi, uint8_t *lqi);
-
-
-uint8_t   getChipPart(void);
-uint8_t   getChipVersion(void);
 void      init(uint8_t channel);
 void      resetDevice(void);
+int       listenForPacket(uint8_t *buf, int8_t blen, uint8_t *rssi, uint8_t *lqi);
+void      sendPacket(uint8_t *buf, int blen);
 void      WriteRegister(char addr, char value);
 uint8_t   ReadRegister(char addr);
 uint8_t   ReadStatus(uint8_t addr);
 uint8_t   SendStrobe(char strobe);
+uint8_t   getChipPart(void);
+uint8_t   getChipVersion(void);
+void      setAssert(uint8_t assert);
 
 #endif
 

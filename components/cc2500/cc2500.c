@@ -122,7 +122,7 @@ esp_err_t begin(uint8_t channel) {
 }
 
 void init(uint8_t channel) {
-	WriteRegister(REG_IOCFG2,0x06);
+	WriteRegister(REG_IOCFG2,0x2E);
 	WriteRegister(REG_IOCFG0,0x01);
 	WriteRegister(REG_IOCFG1,0x06);
 
@@ -363,3 +363,7 @@ uint8_t getChipVersion(void) {
 	return ReadStatus(REG_VERSION);
 }
 
+void setAssert(uint8_t assert)
+{
+	WriteRegister(REG_IOCFG2, assert);
+}
