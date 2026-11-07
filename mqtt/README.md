@@ -24,7 +24,7 @@ This is cc2500 and MQTT gateway application.
 Set the information of your access point.   
 ![Image](https://github.com/user-attachments/assets/f679136c-def1-41d6-b4ea-93bb9427e259)
 
-## Radioi Setting
+## Radio Setting
 Set the wireless communication direction.   
 ![Image](https://github.com/user-attachments/assets/5a0719b7-bc83-424d-94f9-df65dd1ff409)
 
