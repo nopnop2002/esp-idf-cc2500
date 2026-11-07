@@ -24,7 +24,7 @@ This is cc2500 and WebSocket gateway application.
 Set the information of your access point.   
 ![config-wifi](https://github.com/nopnop2002/esp-idf-cc2500/assets/6020549/321a847f-ec71-4254-b954-babdfd111782)
 
-## Radioi Setting
+## Radio Setting
 Set the wireless communication direction.   
 
 ### WS to Radio
